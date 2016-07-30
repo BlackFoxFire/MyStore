@@ -1,0 +1,33 @@
+{% if(typeSauve) %}
+<div class="enteteSection">
+	Information :
+</div>
+<div class="contenuSection">
+	<br />
+	<p class="message">Enregistrement effectué avec succès.</p>
+	<br />
+</div>
+{% else %}
+<div class="enteteSection">
+	Ajouter un type d'articles :
+</div>
+<div class="contenuSection">
+	<form method="post" action="Type/ajouter">
+		<table class="tableAjouterCat">
+			<tr>
+				<td class="">
+					<label for="type">Type d'article : </label>
+				</td>
+				<td class="">
+					<input type="text" name="type" id="type" value="{{ type }}" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="colonneAlignement">
+					<input type="submit" name="submit" id="submit" value="Enregister" />
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+{% endif %}

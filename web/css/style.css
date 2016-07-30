@@ -1,0 +1,336 @@
+/*
+* 
+* style.css
+* @Auteur : Christophe Dufour
+*
+* Fichier des définitions des styles CSS
+*
+*/
+
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+html, body {
+	padding: 5px 5px 5px 5px;
+	
+	/*height: 100%;*/
+	
+	background-color: silver;
+	
+	font-family: Verdana, sans-serif;
+	font-size: 11pt;
+}
+
+
+/* Cadre principale */
+#cadrePrincipal {
+	width: 1000px;
+	/*min-height: 100%;*/
+	
+	margin-bottom: 5px;
+	margin-left: auto;
+	margin-right: auto;
+}
+/* 
+
+/* Entete et titre principal */
+#headerPrincipal{
+	height: 60px;
+	
+	background-color: #295d84;
+	
+	text-align: center;
+}
+
+h1.titrePrincipal {
+	line-height: 50px;
+	
+	color: white;
+	
+	font-weight: bold;
+	text-shadow: 5px 5px 2px black;
+}
+
+
+/* Le menu */
+#menuPrincipal {
+	width: 100%;
+	height: 80px;
+	
+	background-color: #efeee5;
+}
+
+#menuPrincipal ul {
+	text-align: center;
+	
+	list-style-type: none;	
+}
+
+#menuPrincipal li {
+	display: inline-block;
+	
+	width: 160px;
+	line-height: 40px;
+	
+	text-align: center;
+}
+
+#menuPrincipal a {
+	display: block;
+	
+	line-height: 40px;
+	
+	font-weight: bold;
+	
+	color: #000000;
+}
+
+#menuPrincipal a:hover, #menuPrincipal a:focus {
+	background-color: slategrey;
+	
+	color: white;
+}
+
+/* Les liens de façon général */
+a {
+	text-decoration: none;
+}
+
+#sectionPrincipal {
+	margin-top: 30px;
+}
+
+.message {
+	width: 70%;
+	
+	margin: auto;
+	padding: 5px;
+	
+	background-color: slategrey;
+	color: white;
+	
+	text-align: center;
+}
+
+.erreur {
+	background-color: red;
+}
+
+div.enteteSection {
+	padding: 5px;
+	
+	background-color: #295d84;
+	color: white;
+	
+	font-weight: bold;
+	font-size: 112%;
+	
+	text-align: center;
+}
+
+div.contenuSection {
+	margin-bottom: 30px;
+	
+	padding: 3px;
+	
+	background-color: #efeee5;
+}
+
+.zoneDeRecherche {
+	text-align: center;
+}
+
+.zoneDeRecherche input, .zoneDeRecherche select {
+	width: 150px;
+}
+
+.zoneDeRecherche input[type="submit"] {
+	width: auto;
+}
+
+.listeArticles {
+	width: 100%;
+	
+	margin-bottom: 10px;
+}
+
+.coloneImageArticle {
+	width: 200px;
+	
+	text-align: center;
+	vertical-align: middle;
+}
+
+.coloneDetailArticle {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	
+	background-color: #295d84;
+	
+	text-align: center;
+}
+
+.imageArticle {
+	max-width: 200px;
+	max-height: 200px;
+}
+
+.listeArticles td {
+	/* vertical-align: top; */
+}
+
+.labelListeArticle {
+	padding:5px;
+	
+	background-color: #295d84;
+	color: white;
+}
+
+.detailListeArticle {
+	display: inline-block;
+	
+	width: 45%;
+	/* height: 25px; */
+	
+	margin: 5px;
+	padding: 5px;
+	
+	background-color: slategrey;
+	color: white;
+	
+	text-align: left;
+	/* vertical-align: top; */
+}
+
+.zoneFichier {
+	/* overflow: hidden; */
+}
+
+.description {
+	width: auto;
+	/* height: auto; */
+}
+
+.zoneTexte {
+	width: 735px;
+	height: 100px;
+	
+	margin: 5px;
+	padding: 5px;
+	
+	background-color: slategrey;
+	color: white;
+	
+	resize: none;
+}
+
+.fondBlanc {
+	background-color: white;
+	color: black;
+}
+
+.labelDesDetails {
+	display: inline-block;
+	width: 99px;
+}
+
+input, textarea, select {
+	width: 238px;
+	padding: 2px 5px;
+	overflow: hidden;
+}
+
+input[type="file"] {
+	/* margin: 0px; */
+	padding: 0px;
+}
+
+input{
+	/* width: 500px; */
+}
+
+select {
+	width: 250px;
+}
+
+.article {
+	width: 100%;
+}
+
+.bouton {
+	display: inline-block;
+	
+	margin:auto;
+	
+	width: 237px;
+	line-height: 26px;
+	
+	font-size: 9pt;
+	
+	background-color: #e1e1e1;
+	color: black;
+	
+	border: 1px solid #adadad;
+}
+
+.pageUpPageDown {
+	text-align: center;
+}
+
+#footerPrincipal {
+	padding: 5px;
+	
+	line-height: 20px;
+	
+	background-color: #295d84;
+	color:white;
+	
+	text-align: center;
+}
+
+/* Liste des types */
+.tableDesDonnees {
+	width: 100%;
+}
+
+.tableDesDonnees td {
+	padding: 5px;
+	/* border: 1px solid black; */
+}
+
+.titreColonne {
+	background-color: slategrey;
+	color: white;
+	
+	text-align: center;
+}
+
+.tableContenu {
+	background-color: #295d84;
+	color: white;
+}
+
+.colonneAlignement {
+	text-align: center;
+}
+
+.modifier, .supprimer {
+	display: block;
+	color: white;
+}
+
+.modifier:hover, .modifier:focus, .supprimer:hover, .supprimer:focus {
+	background-color: slategrey;
+	color: blue;
+}
+
+/* Ajouter un type */
+.tableAjouterCat {
+	margin: auto;
+}
+
+.tableAjouterCat td {
+	padding: 5px;
+}

@@ -1,0 +1,31 @@
+<div class="enteteSection">
+	Liste des types d'articles :
+</div>
+{% if(aucunEnregistrement) %}
+<div class="contenuSection">
+	<br />
+	<p class="message">Aucun type d'article trouvé.</p>
+	<br />
+</div>
+{% else %}
+<div class="contenuSection">
+	<table class="tableDesDonnees">
+		<tr class="titreColonne">
+			<td>Numéro</td>
+			<td>Types</td>
+			<td>Modifier</td>
+			<td>Supprimer</td>
+		</tr>
+		
+		{% foreach(types as type) %}
+		<tr class="tableContenu">
+			<td class="colonneAlignement">{{ type.getIdType }}</td>
+			<td>{{ type.getType }}</td>
+			<td class="colonneAlignement"><a href="type/modifier/{{ type.getIdType }}" class="modifier">Modifier</a></td>
+			<td class="colonneAlignement"><a href="type/supprimer/{{ type.getIdType }}" class="supprimer">Supprimer</a></td>
+		</tr>
+		{% endforeach %}
+		
+	</table>
+</div>
+{% endif %}

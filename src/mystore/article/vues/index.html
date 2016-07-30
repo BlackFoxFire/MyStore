@@ -1,0 +1,126 @@
+<div class="enteteSection">
+	Rechercher des articles :
+</div>
+<div class="contenuSection">
+	<form method="post" action="Article/rechercherArticle">
+		<div class="zoneDeRecherche">
+			
+			<select name="idType" id="idType">
+				<option value="" selected>Types ...</option>
+				{% foreach(types as type) %}
+				<option value="{{ type.getIdType }}">{{ type.getType }}</option>
+				{% endforeach %}
+			</select>
+			
+			<select name="idCategorie" id="idCategorie">
+				<option value="" selected>Catégorie ...</option>
+				{% foreach(categories as categorie) %}
+				<option value="{{ categorie.getIdCategorie }}">{{ categorie.getCategorie }}</option>
+				{% endforeach %}
+			</select>
+			
+			<select name="idTaille" id="idTaille">
+				<option value="" selected>Taille ...</option>
+				{% foreach(tailles as taille) %}
+				<option value="{{ taille.getIdTaille }}">{{ taille.getTaille }}</option>
+				{% endforeach %}
+			</select>
+			
+			<select name="idCouleur" id="idCouleur">
+				<option value="" selected>Couleur ...</option>
+				{% foreach(couleurs as couleur) %}
+				<option value="{{ couleur.getIdCouleur }}">{{ couleur.getCouleur }}</option>
+				{% endforeach %}
+			</select>
+			
+			<select name="idStatut" id="idStatut">
+				<option value="" selected>Statut ...</option>
+				{% foreach(statuts as statut) %}
+				<option value="{% statut.getIdStatut %}">{{ statut.getStatut }}</option>
+				{% endforeach %}
+			</select>
+			
+			<input type="text" name="chaineDeRecherche" id="chaineDeRecherche" value="" />
+			
+			<input type="submit" name="submit" id="submit" value="Go" class="" />
+		</div>
+	</form>
+</div>
+
+<div class="contenuSection pageUpPageDown">
+	{% if(page > 1) %}
+	<a href="Article/index/{{ pagePrecedante }}" class="bouton">Page précédante</a>
+	{% else %}
+	<div class="bouton">Page précédante</div>
+	{% endif %}
+	
+	{% if(pageMax > 1) %}
+	<div class="bouton">
+		Page : {{ pagesDispo :html }}
+	</div>
+	{% endif %}
+	
+	{% if(page < pageMax) %}
+	<a href="Article/index/{{ pageSuivante }}" class="bouton">Page suivante</a>
+	{% else %}
+	<div class="bouton">Page suivante</div>
+	{% endif %}
+</div>
+	
+<div class="enteteSection">
+	Liste des articles :
+</div>
+<div class="contenuSection">
+	
+	{% foreach(articles as article) %}
+	
+	<table class="listeArticles">
+		<tr>
+			<td colspan="2">
+				<div class="labelListeArticle">Article n°{{ article.getIdArticle }} - {{ article.getArticle }}</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="coloneImageArticle">
+				<a href="Article/modifierArticle/{{ article.getIdArticle }}">
+					<img src="{{ article.getImageArticle }}" alt="{{ article.getArticle }}" class="imageArticle" />
+				</a>
+			</td>
+			<td class="coloneDetailArticle">
+				
+				<div class="detailListeArticle">Types : {{ article.getIdType }}</div>
+				<div class="detailListeArticle">Catégorie : {{ article.getIdCategorie }}</div>
+				<div class="detailListeArticle">Taille : {{ article.getIdTaille }}</div>
+				<div class="detailListeArticle">Couleur : {{ article.getIdCouleur }}</div>
+				<div class="detailListeArticle">Statut : {{ article.getIdStatut }}</div>
+				<div class="detailListeArticle">Prix : {{ article.getPrix }} €</div>
+				
+				<textarea class="zoneTexte" readonly>{{ article.getDescriptionArticle }}</textarea>
+				
+			</td>
+		</tr>
+	</table>
+	
+	{% endforeach %}
+	
+</div>
+
+<div class="contenuSection pageUpPageDown">
+	{% if(page > 1) %}
+	<a href="Article/index/{{ pagePrecedante }}" class="bouton">Page précédante</a>
+	{% else %}
+	<div class="bouton">Page précédante</div>
+	{% endif %}
+	
+	{% if(pageMax > 1) %}
+	<div class="bouton">
+		Page : {{ pagesDispo :html }}
+	</div>
+	{% endif %}
+	
+	{% if(page < pageMax) %}
+	<a href="Article/index/{{ pageSuivante }}" class="bouton">Page suivante</a>
+	{% else %}
+	<div class="bouton">Page suivante</div>
+	{% endif %}
+</div>

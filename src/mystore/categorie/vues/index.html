@@ -1,0 +1,31 @@
+<div class="enteteSection">
+	Liste des catégories d'articles :
+</div>
+{% if(aucunEnregistrement) %}
+<div class="contenuSection">
+	<br />
+	<p class="message">Aucune catégorie d'article trouvé.</p>
+	<br />
+</div>
+{% else %}
+<div class="contenuSection">
+	<table class="tableDesDonnees">
+		<tr class="titreColonne">
+			<td>Numéro</td>
+			<td>Catégories</td>
+			<td>Modifier</td>
+			<td>Supprimer</td>
+		</tr>
+		
+		{% foreach(categories as categorie) %}
+		<tr class="tableContenu">
+			<td class="colonneAlignement">{{ categorie.getIdCategorie }}</td>
+			<td>{{ categorie.getCategorie }}</td>
+			<td class="colonneAlignement"><a href="categorie/modifier/{{ categorie.getIdCategorie }}" class="modifier">Modifier</a></td>
+			<td class="colonneAlignement"><a href="categorie/supprimer/{{ categorie.getIdCategorie }}" class="supprimer">Supprimer</a></td>
+		</tr>
+		{% endforeach %}
+		
+	</table>
+</div>
+{% endif %}

@@ -1,0 +1,33 @@
+{% if(couleurModifiee) %}
+<div class="enteteSection">
+	Information :
+</div>
+<div class="contenuSection">
+	<br />
+	<p class="message">Modification effectuée avec succès.</p>
+	<br />
+</div>
+{% else %}
+<div class="enteteSection">
+	Modifier une couleur d'article :
+</div>
+<div class="contenuSection">
+	<form method="post" action="Couleur/modifier/{{ idCouleur }}">
+		<table class="tableAjouterCat">
+			<tr>
+				<td class="">
+					<label for="nomCouleur">Couleur d'article : </label>
+				</td>
+				<td class="">
+					<input type="text" name="nomCouleur" id="nomCouleur" value="{{ nomCouleur }}" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="colonneAlignement">
+					<input type="submit" name="submit" id="submit" value="Enregister" />
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+{% endif %}

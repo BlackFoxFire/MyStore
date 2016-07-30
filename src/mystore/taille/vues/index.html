@@ -1,0 +1,31 @@
+<div class="enteteSection">
+	Liste des tailles d'articles :
+</div>
+{% if(aucunEnregistrement) %}
+<div class="contenuSection">
+	<br />
+	<p class="message">Aucun taille d'article trouvé.</p>
+	<br />
+</div>
+{% else %}
+<div class="contenuSection">
+	<table class="tableDesDonnees">
+		<tr class="titreColonne">
+			<td>Numéro</td>
+			<td>Tailles</td>
+			<td>Modifier</td>
+			<td>Supprimer</td>
+		</tr>
+		
+		{% foreach(tailles as taille) %}
+		<tr class="tableContenu">
+			<td class="colonneAlignement">{{ taille.getIdTaille }}</td>
+			<td>{{ taille.getTaille }}</td>
+			<td class="colonneAlignement"><a href="taille/modifier/{{ taille.getIdTaille }}" class="modifier">Modifier</a></td>
+			<td class="colonneAlignement"><a href="taille/supprimer/{{ taille.getIdTaille }}" class="supprimer">Supprimer</a></td>
+		</tr>
+		{% endforeach %}
+		
+	</table>
+</div>
+{% endif %}

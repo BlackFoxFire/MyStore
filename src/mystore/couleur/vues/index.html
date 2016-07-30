@@ -1,0 +1,31 @@
+<div class="enteteSection">
+	Liste des couleurs d'articles :
+</div>
+{% if(aucunEnregistrement) %}
+<div class="contenuSection">
+	<br />
+	<p class="message">Aucune couleur d'article trouvé.</p>
+	<br />
+</div>
+{% else %}
+<div class="contenuSection">
+	<table class="tableDesDonnees">
+		<tr class="titreColonne">
+			<td>Numéro</td>
+			<td>Couleurs</td>
+			<td>Modifier</td>
+			<td>Supprimer</td>
+		</tr>
+		
+		{% foreach(couleurs as couleur) %}
+		<tr class="tableContenu">
+			<td class="colonneAlignement">{{ couleur.getIdCouleur }}</td>
+			<td>{{ couleur.getCouleur }}</td>
+			<td class="colonneAlignement"><a href="couleur/modifier/{{ couleur.getIdCouleur }}" class="modifier">Modifier</a></td>
+			<td class="colonneAlignement"><a href="couleur/supprimer/{{ couleur.getIdCouleur }}" class="supprimer">Supprimer</a></td>
+		</tr>
+		{% endforeach %}
+		
+	</table>
+</div>
+{% endif %}

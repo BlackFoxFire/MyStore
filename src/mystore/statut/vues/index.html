@@ -1,0 +1,31 @@
+<div class="enteteSection">
+	Liste des statuts d'articles :
+</div>
+{% if(aucunEnregistrement) %}
+<div class="contenuSection">
+	<br />
+	<p class="message">Aucun statut d'article trouvé.</p>
+	<br />
+</div>
+{% else %}
+<div class="contenuSection">
+	<table class="tableDesDonnees">
+		<tr class="titreColonne">
+			<td>Numéro</td>
+			<td>Statuts</td>
+			<td>Modifier</td>
+			<td>Supprimer</td>
+		</tr>
+		
+		{% foreach(statuts as statut) %}
+		<tr class="tableContenu">
+			<td class="colonneAlignement">{{ statut.getIdStatut }}</td>
+			<td>{{ statut.getStatut }}</td>
+			<td class="colonneAlignement"><a href="statut/modifier/{{ statut.getIdStatut }}" class="modifier">Modifier</a></td>
+			<td class="colonneAlignement"><a href="statut/supprimer/{{ statut.getIdStatut }}" class="supprimer">Supprimer</a></td>
+		</tr>
+		{% endforeach %}
+		
+	</table>
+</div>
+{% endif %}
