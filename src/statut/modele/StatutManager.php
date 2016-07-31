@@ -48,7 +48,7 @@
 			$resultat->setFetchMode(PDO::FETCH_ASSOC);
 			
 			foreach($resultat as $donnees) {
-				$statuts[] = new Statut($donnees);
+				$statuts[$donnees['idStatut']] = new Statut($donnees);
 			}
 			
 			$resultat->closeCursor();

@@ -48,7 +48,7 @@
 			$resultat->setFetchMode(PDO::FETCH_ASSOC);
 			
 			foreach($resultat as $donnees) {
-				$categories[] = new Categorie($donnees);
+				$categories[$donnees['idCategorie']] = new Categorie($donnees);
 			}
 			
 			$resultat->closeCursor();

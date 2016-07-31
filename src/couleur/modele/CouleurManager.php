@@ -48,7 +48,7 @@
 			$resultat->setFetchMode(PDO::FETCH_ASSOC);
 			
 			foreach($resultat as $donnees) {
-				$couleurs[] = new Couleur($donnees);
+				$couleurs[$donnees['idCouleur']] = new Couleur($donnees);
 			}
 			
 			$resultat->closeCursor();

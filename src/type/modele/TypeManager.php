@@ -48,7 +48,7 @@
 			$resultat->setFetchMode(PDO::FETCH_ASSOC);
 			
 			foreach($resultat as $donnees) {
-				$types[] = new Type($donnees);
+				$types[$donnees['idType']] = new Type($donnees);
 			}
 			
 			$resultat->closeCursor();

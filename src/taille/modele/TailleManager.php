@@ -48,7 +48,7 @@
 			$resultat->setFetchMode(PDO::FETCH_ASSOC);
 			
 			foreach($resultat as $donnees) {
-				$tailles[] = new Taille($donnees);
+				$tailles[$donnees['idTaille']] = new Taille($donnees);
 			}
 			
 			$resultat->closeCursor();
