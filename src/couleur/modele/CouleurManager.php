@@ -23,17 +23,17 @@
 		public function getListe($format = CouleurManager::OBJET, $order = CouleurManager::NONTRIE, $offset = 0, $limit = 0) {
 			$sql = "select * from couleurs";
 			
-			if(is_int($limit) && $limit != 0) {
-				if(is_int($offset)) {
-					$sql .= " limit " . (int) $offset . ", " . (int) $limit;
-				}
-			}
-			
 			if($order > 0)
 				$sql .= " order by couleur asc";
 			
 			if($order < 0)
 				$sql .= " order by couleur desc";
+			
+			if(is_int($limit) && $limit != 0) {
+				if(is_int($offset)) {
+					$sql .= " limit " . (int) $offset . ", " . (int) $limit;
+				}
+			}
 			
 			$resultat = $this->executerRequete($sql);
 			$resultat->setFetchMode(PDO::FETCH_ASSOC);

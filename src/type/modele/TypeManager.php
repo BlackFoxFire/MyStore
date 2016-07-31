@@ -23,17 +23,17 @@
 		public function getListe($format = TypeManager::OBJET, $order = TypeManager::NONTRIE, $offset = 0, $limit = 0) {
 			$sql = "select * from types";
 			
-			if(is_int($limit) && $limit != 0) {
-				if(is_int($offset)) {
-					$sql .= " limit " . (int) $offset . ", " . (int) $limit;
-				}
-			}
-			
 			if($order > 0)
 				$sql .= " order by type asc";
 			
 			if($order < 0)
 				$sql .= " order by type desc";
+			
+			if(is_int($limit) && $limit != 0) {
+				if(is_int($offset)) {
+					$sql .= " limit " . (int) $offset . ", " . (int) $limit;
+				}
+			}
 			
 			$resultat = $this->executerRequete($sql);
 			$resultat->setFetchMode(PDO::FETCH_ASSOC);

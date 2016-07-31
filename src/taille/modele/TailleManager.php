@@ -23,17 +23,17 @@
 		public function getListe($format = TailleManager::OBJET, $order = TailleManager::NONTRIE, $offset = 0, $limit = 0) {
 			$sql = "select * from tailles";
 			
-			if(is_int($limit) && $limit != 0) {
-				if(is_int($offset)) {
-					$sql .= " limit " . (int) $offset . ", " . (int) $limit;
-				}
-			}
-			
 			if($order > 0)
 				$sql .= " order by taille asc";
 			
 			if($order < 0)
 				$sql .= " order by taille desc";
+			
+			if(is_int($limit) && $limit != 0) {
+				if(is_int($offset)) {
+					$sql .= " limit " . (int) $offset . ", " . (int) $limit;
+				}
+			}
 			
 			$resultat = $this->executerRequete($sql);
 			$resultat->setFetchMode(PDO::FETCH_ASSOC);
