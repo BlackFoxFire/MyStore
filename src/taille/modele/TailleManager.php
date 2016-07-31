@@ -11,25 +11,16 @@
 	*/
 	
 	/* Définition de la classe. */
-	class tailleManager extends Manager {
-		
-		// A EFFACER
-		public function getListetailles() {
-			$sql = 'select * from tailles order by taille asc';
-			
-			$resultat = $this->executerRequete($sql);
-			
-			foreach($resultat as $donnees) {
-				$tailles[$donnees['idTaille']] = $donnees['taille'];
-			}
-			
-			$resultat->closeCursor();
-			
-			return $tailles;
-		}
+	class TailleManager extends Manager {
+		// Constantes de la classe
+		const OBJET   = 0;
+		const TABLEAU = 1;
+		const DECROISSANT = -1;
+		const NONTRIE     =  0;
+		const CROISSANT   =  1;
 		
 		// Retourne une liste des tailles sous forme d'objet
-		public function getListe($order = 0, $offset = 0, $limit = 0) {
+		public function getListe($format = TailleManager::OBJET, $order = TailleManager::NONTRIE, $offset = 0, $limit = 0) {
 			$sql = "select * from tailles";
 			
 			if(is_int($limit) && $limit != 0) {
@@ -48,7 +39,10 @@
 			$resultat->setFetchMode(PDO::FETCH_ASSOC);
 			
 			foreach($resultat as $donnees) {
-				$tailles[$donnees['idTaille']] = new Taille($donnees);
+				if($format == TailleManager::OBJET)
+					$tailles[$donnees['idTaille']] = new Taille($donnees);
+				else
+					$tailles[$donnees['idTaille']] = $donnees['taille'];
 			}
 			
 			$resultat->closeCursor();

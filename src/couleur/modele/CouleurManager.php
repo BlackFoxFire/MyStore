@@ -12,24 +12,15 @@
 	
 	/* Définition de la classe. */
 	class CouleurManager extends Manager {
-		
-		// A EFFACER
-		public function getListeCouleurs() {
-			$sql = 'select * from couleurs order by couleur asc';
-			
-			$resultat = $this->executerRequete($sql);
-			
-			foreach($resultat as $donnees) {
-				$couleurs[$donnees['idCouleur']] = $donnees['couleur'];
-			}
-			
-			$resultat->closeCursor();
-			
-			return $couleurs;
-		}
+		// Constantes de la classe
+		const OBJET   = 0;
+		const TABLEAU = 1;
+		const DECROISSANT = -1;
+		const NONTRIE     =  0;
+		const CROISSANT   =  1;
 		
 		// Retourne une liste des couleurs sous forme d'objet
-		public function getListe($order = 0, $offset = 0, $limit = 0) {
+		public function getListe($format = CouleurManager::OBJET, $order = CouleurManager::NONTRIE, $offset = 0, $limit = 0) {
 			$sql = "select * from couleurs";
 			
 			if(is_int($limit) && $limit != 0) {
@@ -48,7 +39,10 @@
 			$resultat->setFetchMode(PDO::FETCH_ASSOC);
 			
 			foreach($resultat as $donnees) {
-				$couleurs[$donnees['idCouleur']] = new Couleur($donnees);
+				if($format == CouleurManager::OBJET)
+					$couleurs[$donnees['idCouleur']] = new Couleur($donnees);
+				else
+					$couleurs[$donnees['idCouleur']] = $donnees['couleur'];
 			}
 			
 			$resultat->closeCursor();

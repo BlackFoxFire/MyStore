@@ -12,24 +12,15 @@
 	
 	/* Définition de la classe. */
 	class TypeManager extends Manager {
-		
-		// 
-		public function getListeTypes() {
-			$sql = 'select * from types order by type asc';
-			
-			$resultat = $this->executerRequete($sql);
-			
-			foreach($resultat as $donnees) {
-				$types[$donnees['idType']] = $donnees['type'];
-			}
-			
-			$resultat->closeCursor();
-			
-			return $types;
-		}
+		// Constantes de la classe
+		const OBJET   = 0;
+		const TABLEAU = 1;
+		const DECROISSANT = -1;
+		const NONTRIE     =  0;
+		const CROISSANT   =  1;
 		
 		// Retourne une liste de type d'article sous forme d'objet Type
-		public function getListe($order = 0, $offset = 0, $limit = 0) {
+		public function getListe($format = TypeManager::OBJET, $order = TypeManager::NONTRIE, $offset = 0, $limit = 0) {
 			$sql = "select * from types";
 			
 			if(is_int($limit) && $limit != 0) {
@@ -48,7 +39,10 @@
 			$resultat->setFetchMode(PDO::FETCH_ASSOC);
 			
 			foreach($resultat as $donnees) {
-				$types[$donnees['idType']] = new Type($donnees);
+				if($format == TypeManager::OBJET)
+					$types[$donnees['idType']] = new Type($donnees);
+				else
+					$types[$donnees['idType']] =$donnees['type'];
 			}
 			
 			$resultat->closeCursor();

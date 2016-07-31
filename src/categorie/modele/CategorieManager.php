@@ -12,24 +12,15 @@
 	
 	/* Définition de la classe. */
 	class CategorieManager extends Manager {
-		
-		// A EFFACER
-		public function getListeCategories() {
-			$sql = 'select * from categories order by categorie asc';
-			
-			$resultat = $this->executerRequete($sql);
-			
-			foreach($resultat as $donnees) {
-				$categories[$donnees['idCategorie']] = $donnees['categorie'];
-			}
-			
-			$resultat->closeCursor();
-			
-			return $categories;
-		}
+		// Constantes de la classe
+		const OBJET   = 0;
+		const TABLEAU = 1;
+		const DECROISSANT = -1;
+		const NONTRIE     =  0;
+		const CROISSANT   =  1;
 		
 		// Retourne une liste des categories sous forme d'objet
-		public function getListe($order = 0, $offset = 0, $limit = 0) {
+		public function getListe($format = CategorieManager::OBJET, $order = CategorieManager::NONTRIE, $offset = 0, $limit = 0) {
 			$sql = "select * from categories";
 			
 			if(is_int($limit) && $limit != 0) {
@@ -48,7 +39,10 @@
 			$resultat->setFetchMode(PDO::FETCH_ASSOC);
 			
 			foreach($resultat as $donnees) {
-				$categories[$donnees['idCategorie']] = new Categorie($donnees);
+				if($format == CategorieManager::OBJET)
+					$categories[$donnees['idCategorie']] = new Categorie($donnees);
+				else
+					$categories[$donnees['idCategorie']] = $donnees['categorie'];
 			}
 			
 			$resultat->closeCursor();

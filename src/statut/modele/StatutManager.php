@@ -12,24 +12,15 @@
 	
 	/* Définition de la classe. */
 	class StatutManager extends Manager {
+		// Constantes de la classe
+		const OBJET   = 0;
+		const TABLEAU = 1;
+		const DECROISSANT = -1;
+		const NONTRIE     =  0;
+		const CROISSANT   =  1;
 		
-		// A EFFACER
-		public function getListeStatuts() {
-			$sql = 'select * from statuts order by statut asc';
-			
-			$resultat = $this->executerRequete($sql);
-			
-			foreach($resultat as $donnees) {
-				$statuts[$donnees['idStatut']] = $donnees['statut'];
-			}
-			
-			$resultat->closeCursor();
-			
-			return $statuts;
-		}
-		
-		// Retourne une liste des statuts sous forme d'objet
-		public function getListe($order = 0, $offset = 0, $limit = 0) {
+		// Retourne une liste des statuts sous forme de tableau d'objet
+		public function getListe($format = StatutManager::OBJET, $order = StatutManager::NONTRIE, $offset = 0, $limit = 0) {
 			$sql = "select * from statuts";
 			
 			if(is_int($limit) && $limit != 0) {
@@ -48,7 +39,10 @@
 			$resultat->setFetchMode(PDO::FETCH_ASSOC);
 			
 			foreach($resultat as $donnees) {
-				$statuts[$donnees['idStatut']] = new Statut($donnees);
+				if($format == StatutManager::OBJET)
+					$statuts[$donnees['idStatut']] = new Statut($donnees);
+				else
+					$statuts[$donnees['idStatut']] = $donnees['statut'];
 			}
 			
 			$resultat->closeCursor();
