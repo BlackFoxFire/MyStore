@@ -13,7 +13,7 @@
 	// namespace BlackFox\MonFramework;
 	
 	/* Définition de la classe. */
-	class Requete {
+	class Requete extends MonFramework {
 		
 		// Tableau des paramètres d'un requête http
 		private $parametres;

@@ -14,7 +14,7 @@
 	// namespace BlackFox\MonFramework;
 	
 	/* Définition de la classe. */
-	abstract class Manager {
+	abstract class Manager extends MonFramework {
 		
 		// Lien vers la base de données
 		private static $bdd;

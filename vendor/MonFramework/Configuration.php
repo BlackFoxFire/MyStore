@@ -23,23 +23,17 @@
 		// Tableau des paramètres de la base de données
 		private static $parametresBdd;
 		
-		public static function getConfig($config) {
-			if(is_null(self::$config))
-				self::loadConfig();
-			
-			if(isset(self::$config['app'][$config])) {
+		public static function getConfig($config, $valeurParDefaut) {
+			if(isset(self::loadConfig()['app'][$config])) {
 				return self::$config['app'][$config];
 			}
 			
-			throw new Exception("Mauvaise configuration du fichier 'app.ini'.");
+			return $valeurParDefaut;
 		}
 		
 		// Vérifie si un module est présent
 		public static function moduleExiste($module) {
-			if(is_null(self::$config))
-				self::loadConfig();
-			
-			foreach(self::$config[self::setEnvironnement()] as $key => $valeur) {
+			foreach(self::loadConfig()[self::$environnement] as $key => $valeur) {
 				if(strcasecmp($key, $module) == 0)
 					return true;
 			}
@@ -49,13 +43,14 @@
 		
 		// Routourne le module par defaut
 		public static function moduleParDefaut() {
-			if(is_null(self::$config))
-				self::loadConfig();
+			if(isset(self::loadConfig()[self::$environnement])) {
+				if($module = array_search('defaut', self::$config[self::$environnement]))
+					return $module;
+				else
+					throw new Exception("Aucun module n'est marqué par defaut.");
+			}
 			
-			if($module = array_search('defaut', self::$config[self::setEnvironnement()]))
-				return $module;
-			else
-				throw new Exception("Aucun module n'est marqué par defaut.");
+			throw new Exception("Section [" . self::$environnement . "] absente du fichier de configuration 'app.ini'.");
 		}
 		
 		// Charge le fichier des modules autorisés/disponibles
@@ -65,6 +60,7 @@
 			if(file_exists($fichier))
 				self::$config = parse_ini_file($fichier, true, INI_SCANNER_RAW);
 			else
+				// exit("Fichier de configuration manquant : '" . basename($fichier) . "'.");
 				throw new Exception("Fichier de configuration manquant : '" . basename($fichier) . "'.");
 			
 			return self::$config;
@@ -95,16 +91,15 @@
 			}*/
 			
 			if(self::$parametresBdd == null) {
-				if(self::setEnvironnement() == 'dev')
+				if(self::$environnement == 'dev')
 					$fichier = "../app/dev.ini";
-				elseif (self::setEnvironnement() == 'prod')
-					$fichier = "../app/prod.ini";
 				else
-					throw new Exception("Mauvais paramètre d'environnement !");
+					$fichier = "../app/prod.ini";
 				
 				if(file_exists($fichier))
 					self::$parametresBdd = parse_ini_file($fichier);
-				else throw new Exception("Aucune fichier de configuration trouvé !");
+				else
+					throw new Exception("Aucune fichier de configuration trouvé !");
 			}
 			
 			return self::$parametresBdd;

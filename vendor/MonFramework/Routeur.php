@@ -14,7 +14,7 @@
 	// namespace BlackFox\MonFramework;
 	
 	/* Définition de la classe. */
-	class Routeur {
+	class Routeur extends MonFramework {
 		
 		// Tableau des parametres controleur/action/id
 		private $parametres;

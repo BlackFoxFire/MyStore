@@ -26,10 +26,9 @@
 		
 		// Charge une classe controlleur ou un manager de l'application
 		public static function applicationClassAutoLoader($classe) {
-			$application = strtolower(Configuration::getConfig('app'));
 			$dossier = strtolower(str_replace('Controleur', "", $classe));
 			
-			$fichier = "../src/" . $application . '/' . $dossier . '/' . $classe . ".php";
+			$fichier = "../src/" . $dossier . '/' . $classe . ".php";
 			
 			if(file_exists($fichier)) {
 				require_once($fichier);
@@ -38,7 +37,7 @@
 			
 			$dossier = strtolower(str_replace('Manager', "", $classe));
 			
-			$fichier = "../src/" . $application . '/' . $dossier . '/modele/' . $classe . ".php";
+			$fichier = "../src/" . $dossier . '/modele/' . $classe . ".php";
 			
 			if(file_exists($fichier)) {
 				require_once($fichier);
