@@ -130,15 +130,10 @@
 					$extentionValide = array('gif', 'jpeg', 'jpg', 'png');
 					$extentionFichier = strtolower(  substr(  strrchr($_FILES['imageArticle']['name'], '.')  ,1)  );
 					
-					if($_FILES['imageArticle']['size'] <= $tailleMax && in_array($extentionFichier, $extentionValide)) {
-						if(self::setEnvironnement() == 'dev') {
-							$imageArticle = "images/downloadDev/" . md5(uniqid('', true)) . '.' . $extentionFichier;
-						}
-						else {
-							$imageArticle = "images/download/" . md5(uniqid('', true)) . '.' . $extentionFichier;
-						}
-					}
-					else $articleValide = false;
+					if($_FILES['imageArticle']['size'] <= $tailleMax && in_array($extentionFichier, $extentionValide))
+						$imageArticle = "images/download/" . md5(uniqid('', true)) . '.' . $extentionFichier;
+					else
+						$articleValide = false;
 					
 				}
 				else $articleValide = false;
