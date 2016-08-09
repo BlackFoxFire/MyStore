@@ -27,24 +27,18 @@
 		
 		// Constructeur de classe
 		public function __construct() {
-			$this->articleManager = new ArticleManager;
+			$this->articleManager   = new ArticleManager;
 			$this->categorieManager = new CategorieManager;
-			$this->couleurManager = new CouleurManager;
-			$this->statutManager = new StatutManager;
-			$this->tailleManager = new TailleManager;
-			$this->typeManager = new TypeManager;
+			$this->couleurManager   = new CouleurManager;
+			$this->statutManager    = new StatutManager;
+			$this->tailleManager    = new TailleManager;
+			$this->typeManager      = new TypeManager;
 			
-			// $this->categories = $this->categorieManager->getListeCategories();
-			// $this->couleurs = $this->couleurManager->getListeCouleurs();
-			// $this->statuts = $this->statutManager->getListeStatuts();
-			// $this->tailles = $this->tailleManager->getListeTailles();
-			// $this->types = $this->typeManager->getListeTypes();
-			
-			$this->categories = $this->categorieManager->getListe(1);
-			$this->couleurs = $this->couleurManager->getListe(1);
-			$this->statuts = $this->statutManager->getListe(1);
-			$this->tailles = $this->tailleManager->getListe(1);
-			$this->types = $this->typeManager->getListe(1);
+			$this->categories = $this->categorieManager->getListe(CategorieManager::TABLEAU, CategorieManager::CROISSANT);
+			$this->couleurs   = $this->couleurManager->getListe(CouleurManager::TABLEAU, CouleurManager::CROISSANT);
+			$this->statuts    = $this->statutManager->getListe(StatutManager::TABLEAU, StatutManager::CROISSANT);
+			$this->tailles    = $this->tailleManager->getListe(TailleManager::TABLEAU, TailleManager::CROISSANT);
+			$this->types      = $this->typeManager->getListe(TypeManager::TABLEAU, TypeManager::CROISSANT);
 		}
 		
 		// Action par defaut
@@ -64,7 +58,7 @@
 			
 			
 			$offset = ($page - 1) * 20;
-			$articles = $this->articleManager->getListe(0, $offset, 20);
+			$articles = $this->articleManager->getListe(ArticleManager::NONTRIE, $offset, 20);
 			
 			$pagePrecedante = $page - 1;
 			$pageSuivante = $page + 1;
@@ -430,6 +424,15 @@
 				'tailles' => $this->tailles, 'types' => $this->types));
 			
 			$articles->closeCursor();
+		}
+		
+		// 
+		private function retourneTableau(array $tableauObject) {
+			foreach($tableauObject as $key => $value) {
+				$tableau[$key] = $value;
+			}
+			
+			return $tableau;
 		}
 		
 	}

@@ -9,40 +9,19 @@
 	*
 	*/
 	
+	
 	/* Définition de la classe. */
 	class ArticleManager extends Manager {
-		
-		// Retourne la liste des articles
-		public function getListeArticles($page = '*', $enregistrementParPage = 20) {
-			$sql = 'select * from articles';
-			
-			if($page !== '*') {
-				if(is_int($page) && is_int($enregistrementParPage)) {
-					$pageMax = ceil($this->compterArticle() / $enregistrementParPage);
-					
-					if($page < 1) $page = 1;
-					if($page > $pageMax) $page = $pageMax;
-					
-					$depart = ($page - 1) * $enregistrementParPage;
-					
-					$sql .= ' limit ' . $depart . ', ' . $enregistrementParPage;
-				}
-			}
-			
-			$articles = $this->executerRequete($sql);
-			
-			return $articles;
-		}
+		// Constantes de la classe
+		const OBJET   = 0;
+		const TABLEAU = 1;
+		const DECROISSANT = -1;
+		const NONTRIE     =  0;
+		const CROISSANT   =  1;
 		
 		// Retourne une liste d'article sous forme d'objet Article
-		public function getListe($order = 0, $offset = 0, $limit = 0) {
+		public function getListe($order = ArticleManager::NONTRIE, $offset = 0, $limit = 0) {
 			$sql = "select * from articles";
-			
-			if(is_int($limit) && $limit != 0) {
-				if(is_int($offset)) {
-					$sql .= " limit " . (int) $offset . ", " . (int) $limit;
-				}
-			}
 			
 			if($order > 0)
 				$sql .= " order by article asc";
@@ -50,11 +29,17 @@
 			if($order < 0)
 				$sql .= " order by article desc";
 			
+			if(is_int($limit) && $limit != 0) {
+				if(is_int($offset)) {
+					$sql .= " limit " . (int) $offset . ", " . (int) $limit;
+				}
+			}
+			
 			$resultat = $this->executerRequete($sql);
 			$resultat->setFetchMode(PDO::FETCH_ASSOC);
 			
 			foreach($resultat as $donnees) {
-				$articles[] = new Article($donnees);
+				$articles[$donnees['idArticle']] = new Article($donnees);
 			}
 			
 			$resultat->closeCursor();

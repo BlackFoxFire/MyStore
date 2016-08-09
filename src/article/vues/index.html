@@ -87,12 +87,16 @@
 				</a>
 			</td>
 			<td class="coloneDetailArticle">
-				
-				<div class="detailListeArticle">Types : {{ article.getIdType }}</div>
-				<div class="detailListeArticle">Catégorie : {{ article.getIdCategorie }}</div>
-				<div class="detailListeArticle">Taille : {{ article.getIdTaille }}</div>
-				<div class="detailListeArticle">Couleur : {{ article.getIdCouleur }}</div>
-				<div class="detailListeArticle">Statut : {{ article.getIdStatut }}</div>
+				{{ idType = article.getIdType }}
+				<div class="detailListeArticle">Types : {{ types.idType }}</div>
+				{{ idCategorie = article.getIdCategorie }}
+				<div class="detailListeArticle">Catégorie : {{ categories.idCategorie }}</div>
+				{{ idTaille = article.getIdTaille }}
+				<div class="detailListeArticle">Taille : {{ tailles.idTaille }}</div>
+				{{ idCouleur = article.getIdCouleur }}
+				<div class="detailListeArticle">Couleur : {{ couleurs.idCouleur }}</div>
+				{{ idStatut = article.getIdStatut }}
+				<div class="detailListeArticle">Statut : {{ statuts.idStatut }}</div>
 				<div class="detailListeArticle">Prix : {{ article.getPrix }} €</div>
 				
 				<textarea class="zoneTexte" readonly>{{ article.getDescriptionArticle }}</textarea>
